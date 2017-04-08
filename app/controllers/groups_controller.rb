@@ -13,11 +13,6 @@ class GroupsController < ApplicationController
  def edit
  end
 
-  if current_user != @group.user
-      redirect_to root_path, alert: "You have no permission."
-    end
-  end
-
   def new
     @group = Group.new
   end
@@ -33,18 +28,9 @@ class GroupsController < ApplicationController
     end
   end
 
-    def update
-
+  def update
    if @group.update(group_params)
       redirect_to groups_path, notice: "Update Success"
-    else
-      render :edit
-    end
-  end
-
-
-      if @group.update(group_params)
-        redirect_to groups_path, notice: "Update Success"
     else
       render :edit
     end
